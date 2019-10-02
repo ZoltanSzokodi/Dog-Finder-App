@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import DogDetails from './DogDetails';
-import DogList from './DogList';
-import Navbar from './Navbar';
-import hazel from './images/hazel.jpg';
-import tubby from './images/tubby.jpg';
-import whiskey from './images/whiskey.jpg';
-import './App.css';
+import React, { Component } from "react";
+import Routes from "./Routes";
+import Navbar from "./Navbar";
+import whiskey from "./images/whiskey.jpg";
+import tubby from "./images/tubby.jpg";
+import hazel from "./images/hazel.jpg";
+import "./App.css";
 
 class App extends Component {
   static defaultProps = {
@@ -42,28 +40,14 @@ class App extends Component {
         ]
       }
     ]
-  }
+  };
   render() {
-    const getDog = props => {
-      let name = props.match.params.name;
-      let currentDog = this.props.dogs.find(dog => dog.name.toLowerCase() === name.toLowerCase());
-
-      return <DogDetails {...props} dog={currentDog} />;
-    };
     return (
       <div>
         <Navbar dogs={this.props.dogs} />
-        <Switch>
-          <Route
-            exact
-            path="/dogs"
-            render={() => <DogList dogs={this.props.dogs} />} />
-
-          <Route
-            exact
-            path="/dogs/:name"
-            render={getDog} />
-        </Switch>
+        <div className='container'>
+          <Routes dogs={this.props.dogs} />
+        </div>
       </div>
     );
   }
